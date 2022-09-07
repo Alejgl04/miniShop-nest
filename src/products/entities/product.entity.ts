@@ -1,4 +1,6 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { IsOptional } from 'class-validator';
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ProductImage } from './product-image.entity';
 
 
 @Entity()
@@ -55,6 +57,13 @@ export class Product {
   })
   tags: string[];
 
+  @IsOptional()
+  @OneToMany(
+    () => ProductImage,
+    (productImage) => productImage.product,
+    { cascade: true }
+  )
+  images?: ProductImage;
 
   @BeforeInsert()
   checkSlugInsert(){
