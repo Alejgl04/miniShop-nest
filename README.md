@@ -6,10 +6,17 @@
 # Teslo API
 
 1. Clone project
+
 2. ```yarn install```
+
 3. Clone file ```.env.-template``` and renamed to ```.env```
+
 4. Change enviroment
+
 5. Start database
 ```docker-compose up -d```
 
-6. Run ```yarn start:dev```
+6. Execute Seed
+```localhost:3001/api/seed```
+
+7. Run ```yarn start:dev```
