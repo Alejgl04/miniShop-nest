@@ -16,16 +16,16 @@ export class JwtStrategy extends PassportStrategy( Strategy ) {
     configService: ConfigService
   ){
     super({
-      secretOrKey: configService.get('JTW_SECRET'),
+      secretOrKey: configService.get('JWT_SECRET'),
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     });
   }
 
   async validate( payload: JwtPayload ): Promise<User> {
     
-    const { email } = payload; 
+    const { id } = payload; 
 
-    const user = await this.userRepository.findOneBy({ email });
+    const user = await this.userRepository.findOneBy({ id: id });
     if ( !user )
       throw new UnauthorizedException("Token not valid");
     
