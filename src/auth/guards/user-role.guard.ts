@@ -30,7 +30,7 @@ export class UserRoleGuard implements CanActivate {
         return true;
       }
     }
-    throw new ForbiddenException(`User needs a valid role for this request`);
+    throw new ForbiddenException(`User needs a valid role for this request [${validRoles}]`);
     
   }
 }
