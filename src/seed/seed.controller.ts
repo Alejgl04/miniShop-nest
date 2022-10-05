@@ -1,5 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { SeedService } from './seed.service';
+import { Auth } from '../auth/decorators/auth.decorators';
+import { ValidRoles } from '../auth/interfaces/valid-roles';
 
 @Controller('seed')
 export class SeedController {
@@ -7,7 +9,8 @@ export class SeedController {
 
 
   @Get()
-  asyexecuteSeed() {
+  // @Auth( ValidRoles.admin )
+  executeSeed() {
     return this.seedService.runSeed();
   }
 }
