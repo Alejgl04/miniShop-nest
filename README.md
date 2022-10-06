@@ -16,7 +16,7 @@
 5. Start database
 ```docker-compose up -d```
 
-6. Execute Seed
-```localhost:3001/api/seed```
+6. Run ```yarn start:dev```
 
-7. Run ```yarn start:dev```
+7. Execute Seed
+```localhost:3001/api/seed```
