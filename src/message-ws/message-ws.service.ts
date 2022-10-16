@@ -23,9 +23,12 @@ export class MessageWsService {
   
   async registerClient( client: Socket, userId: string ) {
     
-    const user = await this.userRepository.findOneBy({ id: userId })
+    const user = await this.userRepository.findOneBy({ id: userId });
+    
     if ( !user ) throw new Error('User not found'); 
     if ( !user.isActive ) throw new Error('User not active'); 
+
+    this.checkUserConnection(user);
 
     this.connectedClients[client.id] = {
       socket: client,
@@ -47,4 +50,18 @@ export class MessageWsService {
     return this.connectedClients[socketId].user.fullName;
   }
 
+  private checkUserConnection( user: User ) {
+
+    for (const clientId of Object.keys( this.connectedClients )) {
+      
+      const connectedClient = this.connectedClients[clientId];
+
+      if ( connectedClient.user.id === user.id ) {
+        connectedClient.socket.disconnect();
+        break;
+      }
+
+    }
+
+  }
 }
